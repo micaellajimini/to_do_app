@@ -36,10 +36,24 @@ const styles = StyleSheet.create({
     borderTopLeftRadius : 10,
     borderTopRightRadius : 10,
     ...Platform.select({
-      ios : {},
+      ios : {
+        shadowColor:"rgb(50, 50, 50)",
+        shadowOpacity : 0.5,
+        shadowRadius: 10,
+        shadowOffset : {
+          height : -1,
+          width : 0,
+        }
+      },
       android : {
-        elevation : 3,
+        elevation : 5,
       },
     })
+  },
+  input : {
+    padding : 20,
+    borderBottomColor: "#bbb",
+    borderBottomWidth : 1,
+    fontSize : 20,
   }
 });
