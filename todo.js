@@ -4,17 +4,20 @@ import {
   StyleSheet,
   Text,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 export default class Todo extends React.Component {
   state = {
     isEdit: false,
-    isCompleted: false
+    isCompleted: false,
+    toDoValue: ""
   };
   render() {
-    const { isCompleted, isEdit } = this.state;
+    const { isCompleted, isEdit, toDoValue } = this.state;
+    const { text } = this.props;
     return (
       <View style={styles.container2}>
         <View style={styles.column}>
@@ -26,14 +29,29 @@ export default class Todo extends React.Component {
               ]}
             />
           </TouchableOpacity>
-          <Text
-            style={[
-              styles.textstyle,
-              isCompleted ? styles.completedText : styles.uncompletedText
-            ]}
-          >
-            Text123
-          </Text>
+          {isEdit ? (
+            <TextInput
+              onChangeText={this._controlInput}
+              returnKeyType={"done"}
+              style={[
+                styles.input,
+                styles.textstyle,
+                isCompleted ? styles.completedText : styles.uncompletedText
+              ]}
+              value={toDoValue}
+              multiline={true}
+              onBlur = {this._finishEditButton}
+            />
+          ) : (
+            <Text
+              style={[
+                styles.textstyle,
+                isCompleted ? styles.completedText : styles.uncompletedText
+              ]}
+            >
+              {text}
+            </Text>
+          )}
         </View>
         {isCompleted ? null : isEdit ? (
           <View style={styles.actions}>
@@ -69,13 +87,20 @@ export default class Todo extends React.Component {
     });
   };
   _editButton = () => {
+    const { text } = this.props;
     this.setState({
-      isEdit: true
+      isEdit: true,
+      toDoValue: text
     });
   };
   _finishEditButton = () => {
     this.setState({
       isEdit: false
+    });
+  };
+  _controlInput = text => {
+    this.setState({
+      toDoValue: text
     });
   };
 }
@@ -130,7 +155,7 @@ const styles = StyleSheet.create({
   actionText: {
     fontSize: 20
   },
-  hiddenView: {
-    overflow: "hidden"
+  input: {
+    width: width / 2
   }
 });

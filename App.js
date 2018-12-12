@@ -16,7 +16,7 @@ export default class App extends React.Component {
         <View style={styles.card}>
           <TextInput style={styles.input} placeholder={"New To Do"} value={newTodo} onChangeText = {this._controlnewTodo} placeholderTextColor={"#999"} returnKeyType={"done"} autoCorrect = {false}/>
           <ScrollView contentContainerStyle={styles.todos}>
-            <Todo />
+            <Todo text={"To do"}/>
           </ScrollView>
         </View>
       </View>
