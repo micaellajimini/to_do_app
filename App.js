@@ -5,7 +5,7 @@ import Todo from "./todo";
 const {height,width} = Dimensions.get("window");
 export default class App extends React.Component {
   state = {
-    newTodo : ""
+    newTodo : "",
   }
   render() {
     const { newTodo } = this.state;
