@@ -1,14 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View , StatusBar, TextInput, Dimensions, Platform, ScrollView } from 'react-native';
 import Todo from "./todo";
-
+import { AppLoading } from 'expo';
 const {height,width} = Dimensions.get("window");
 export default class App extends React.Component {
   state = {
     newTodo : "",
+    loadedToDos : false,
   }
   render() {
-    const { newTodo } = this.state;
+    const { newTodo, loadedToDos } = this.state;
+    if(!loadedToDos){
+      return <AppLoading />;
+    }
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />

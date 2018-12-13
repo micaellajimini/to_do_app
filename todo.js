@@ -34,8 +34,8 @@ export default class Todo extends React.Component {
               onChangeText={this._controlInput}
               returnKeyType={"done"}
               style={[
-                styles.input,
                 styles.textstyle,
+                styles.input,
                 isCompleted ? styles.completedText : styles.uncompletedText
               ]}
               value={toDoValue}
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   input: {
-    width: width / 2
+    width: width / 2,
+    marginVertical : 17,
   }
 });
