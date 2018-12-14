@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , StatusBar, TextInput, Dimensions, Platform, ScrollView } from 'react-native';
+import { Image,StyleSheet, Text, View , StatusBar, TextInput, Dimensions, Platform, ScrollView } from 'react-native';
 import Todo from "./todo";
 import { AppLoading } from 'expo';
 const {height,width} = Dimensions.get("window");
@@ -8,10 +8,18 @@ export default class App extends React.Component {
     newTodo : "",
     loadedToDos : false,
   }
+  componentDidMout = () => {
+    this._loadToDos();
+  }
   render() {
     const { newTodo, loadedToDos } = this.state;
     if(!loadedToDos){
-      return <AppLoading />;
+      return(
+        <View>
+          <StatusBar hidden = {true} />
+          <Image style={styles.image} source={require('./assets/moomin.png')}/>
+        </View>
+      );
     }
     return (
       <View style={styles.container}>
@@ -32,6 +40,11 @@ export default class App extends React.Component {
       newTodo : text
     });
   };
+  _loadToDos =() =>{
+    this.setState({
+      loadedToDos : true
+    })
+  }
 }
 
 const styles = StyleSheet.create({
@@ -46,6 +59,11 @@ const styles = StyleSheet.create({
     fontWeight : "500",
     marginTop : 50,
     marginBottom: 30,
+  },
+  image : {
+    height : height,
+    width : width,
+
   },
   card : {
     backgroundColor : "white",
